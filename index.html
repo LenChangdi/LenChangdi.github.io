@@ -152,10 +152,12 @@
       
         <h1 id="1、原理说明"><a href="#1、原理说明" class="headerlink" title="1、原理说明"></a>1、原理说明</h1><ul>
 <li>网页获取源代码，手动复制文章</li>
-<li>使用python把文章里的网页标签去除</li></ul>
-        
-          <a class="article-more-a" href="/2020/10/10/pytxt/#more">more >></a>
-        
+<li>使用python把文章里的网页标签去除</li>
+</ul>
+<h1 id="2、获取文章"><a href="#2、获取文章" class="headerlink" title="2、获取文章"></a>2、获取文章</h1><p>进到你想获取文章的页面，右击，进入网页源代码，一直往下翻，找到你要的文章并复制下来（其实这步就可以自己动手把标签删掉，但是太多就不好弄了），放到一个文本文件里面并且命名为temp，并且放在E盘的根目录上。<br><img src="/2020/10/10/pytxt/1.png"><br><img src="/2020/10/10/pytxt/2.png"></p>
+<h1 id="3、python代码"><a href="#3、python代码" class="headerlink" title="3、python代码"></a>3、python代码</h1><p>运行下面的代码，再打开temp就可以发现里面的网页标签被删掉了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;E:\\temp.txt&quot;,encoding&#x3D;&#39;gbk&#39;) as f:</span><br><span class="line">    a&#x3D;f.read()</span><br><span class="line">    b&#x3D;re.sub(&#39;&lt;&#x2F;?[A-Za-z]+&gt;&#39;,&#39; &#39;,a)</span><br><span class="line">with open(&quot;E:\\temp.txt&quot;,&quot;w&quot;) as f:</span><br><span class="line">    f.write(b)</span><br></pre></td></tr></table></figure>
+
       
 
       
