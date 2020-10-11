@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>小黑屋</title>
+  <title>排序代码|java | 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分享一些有趣的技巧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小黑屋">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）1，冒泡排序123456789101112public static void Bubble(int[] array) &amp;#123;	int temp;	for (int i &#x3D; 0; i &lt; array.length - 1; i++) &amp;#123;		for (int j &#x3D; i; j &lt; array.le">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序代码|java">
+<meta property="og:url" content="http://example.com/2020/10/11/sort1/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="分享一些有趣的技巧">
+<meta property="og:description" content="各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）1，冒泡排序123456789101112public static void Bubble(int[] array) &amp;#123;	int temp;	for (int i &#x3D; 0; i &lt; array.length - 1; i++) &amp;#123;		for (int j &#x3D; i; j &lt; array.le">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-11T02:20:33.000Z">
+<meta property="article:modified_time" content="2020-10-11T02:25:37.730Z">
 <meta property="article:author" content="LenChangdi">
 <meta name="twitter:card" content="summary">
   
@@ -128,16 +130,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-sort1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-sort1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/11/sort1/">排序代码|java</a>
+    <h1 class="article-title" itemprop="name">
+      排序代码|java
     </h1>
   
 
@@ -151,9 +151,26 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）"><a href="#各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）" class="headerlink" title="各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）"></a>各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）</h1><h2 id="1，冒泡排序"><a href="#1，冒泡排序" class="headerlink" title="1，冒泡排序"></a>1，冒泡排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void Bubble(int[] array) &#123;</span><br><span class="line">	int temp;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; array.length - 1; i++) &#123;</span><br><span class="line">		for (int j &#x3D; i; j &lt; array.length; j++) &#123;</span><br><span class="line">			if(array[i] &gt; array[j]) &#123;</span><br><span class="line">				temp &#x3D; array[i];</span><br><span class="line">				array[i] &#x3D; array[j];</span><br><span class="line">				array[j] &#x3D; temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2020/10/11/sort1/#more">more >></a>
-        
+<a id="more"></a>
+<h2 id="2，插入排序"><a href="#2，插入排序" class="headerlink" title="2，插入排序"></a>2，插入排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public static void Insert(int[] array) &#123;</span><br><span class="line">	int temp;	&#x2F;&#x2F; 中间变量</span><br><span class="line">	int SortIndex;&#x2F;&#x2F; 插入位置</span><br><span class="line">	for (int i &#x3D; 0; i &lt; array.length - 1; i++) &#123;</span><br><span class="line">		SortIndex &#x3D; i;</span><br><span class="line">		if(array[i] &lt; array[0])</span><br><span class="line">			SortIndex &#x3D; 0;</span><br><span class="line">		else if (array[i] &gt; array[array.length - 1])</span><br><span class="line">			SortIndex &#x3D; array.length - 1;</span><br><span class="line">		else</span><br><span class="line">			for (int j &#x3D; 1; j &lt; array.length; j++) &#123;</span><br><span class="line">				if(array[i] &gt;&#x3D; array[j - 1] &amp;&amp; array[i] &lt;&#x3D; array[j]) &#123;</span><br><span class="line">					SortIndex &#x3D; j;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		if(SortIndex &#x3D;&#x3D; i)</span><br><span class="line">			continue;</span><br><span class="line">		else if(SortIndex &lt; i) &#123;</span><br><span class="line">			temp &#x3D; array[i];</span><br><span class="line">			for (int z &#x3D; i; z &gt; SortIndex; z--) &#123;</span><br><span class="line">				array[z] &#x3D; array[z-1];</span><br><span class="line">			&#125;</span><br><span class="line">			array[SortIndex] &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			temp &#x3D; array[i];</span><br><span class="line">			for (int z &#x3D; i; z &lt; SortIndex; z++) &#123;</span><br><span class="line">				array[z] &#x3D; array[z + 1];</span><br><span class="line">			&#125;</span><br><span class="line">			array[SortIndex] &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3，选择排序"><a href="#3，选择排序" class="headerlink" title="3，选择排序"></a>3，选择排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void SelectSort(int[] array) &#123;</span><br><span class="line">	int min;</span><br><span class="line">	int temp;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; array.length - 1; i++) &#123;</span><br><span class="line">		min &#x3D; i;</span><br><span class="line">		for (int j &#x3D; i; j &lt; array.length; j++) &#123;</span><br><span class="line">			if(array[min] &gt; array[j])min &#x3D; j;</span><br><span class="line">		&#125;</span><br><span class="line">		if(min !&#x3D; i) &#123;</span><br><span class="line">			temp &#x3D; array[i];</span><br><span class="line">			array[i] &#x3D; array[min];</span><br><span class="line">			array[min] &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4，堆排序"><a href="#4，堆排序" class="headerlink" title="4，堆排序"></a>4，堆排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public static void HillSort(int[] array) &#123;&#x2F;&#x2F;堆排序</span><br><span class="line">	int temp;</span><br><span class="line">	int span;&#x2F;&#x2F;数与数之间的跨度</span><br><span class="line">	for (int i &#x3D; 2; i &lt; array.length; i++) &#123;</span><br><span class="line">		span &#x3D; array.length &#x2F; i;</span><br><span class="line">		for (int j &#x3D; 0; j &lt; span; j++) &#123;</span><br><span class="line">			for (int z &#x3D; j+span; z &lt; array.length; z+&#x3D; span) &#123;</span><br><span class="line">				if(array[z] &lt; array[z - span]) &#123;</span><br><span class="line">					temp &#x3D; array[z];</span><br><span class="line">					array[z] &#x3D; array[z - span];</span><br><span class="line">					array[z - span] &#x3D; temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5，快速排序"><a href="#5，快速排序" class="headerlink" title="5，快速排序"></a>5，快速排序</h2><p>快速排序比较特殊，这里采用Comparable类型数组作为全局变量的方法来解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class Ex03_2 &#123;</span><br><span class="line">	static Comparable [] a&#x3D; &#123;8,4,3,7,1,5,6,2&#125;;</span><br><span class="line">	private static void quickSort(int p,int r)</span><br><span class="line">	&#123;</span><br><span class="line">		if(p&lt;r)</span><br><span class="line">		&#123;</span><br><span class="line">			int q&#x3D;partition(p,r);</span><br><span class="line">			quickSort(p,q-1);</span><br><span class="line">			quickSort(q+1,r);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	private static int partition(int p,int r)</span><br><span class="line">	&#123;</span><br><span class="line">		Comparable x&#x3D;a[p];</span><br><span class="line">		int i&#x3D;p, j&#x3D;r+1;</span><br><span class="line">		while(true) &#123;</span><br><span class="line">			while(a[++i].compareTo(x)&lt;0&amp;&amp;i&lt;r);</span><br><span class="line">			while(a[--j].compareTo(x)&gt;0);</span><br><span class="line">			if(i&gt;&#x3D;j)</span><br><span class="line">				break;</span><br><span class="line">			MyMath.swap(a,i,j);</span><br><span class="line">		&#125;</span><br><span class="line">		a[p]&#x3D;a[j];</span><br><span class="line">		a[j]&#x3D;x;</span><br><span class="line">		return j;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		quickSort(0,7);</span><br><span class="line">		for(int i&#x3D;0;i&lt;a.length;i++)</span><br><span class="line">			System.out.print(a[i]+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要把MyMath类和上面放在同一个包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class MyMath&#123;</span><br><span class="line">	public static void swap(Comparable[] a,int i,int j) &#123;</span><br><span class="line">		Comparable temp&#x3D;a[i];</span><br><span class="line">		a[i]&#x3D;a[j];</span><br><span class="line">		a[j]&#x3D;temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是快速排序的一种特殊情况，随机确定基准，也是快速排序时间复杂度较小的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Random;</span><br><span class="line">public class Ex03_3 &#123;</span><br><span class="line">	static Comparable [] a&#x3D; &#123;8,4,3,7,1,5,6,2&#125;;</span><br><span class="line">	private static void randomizedQuickSort(int p,int r)</span><br><span class="line">	&#123;</span><br><span class="line">		if(p&lt;r)</span><br><span class="line">		&#123;</span><br><span class="line">			int q&#x3D;randomizedPartition(p,r);</span><br><span class="line">			randomizedQuickSort(p,q-1);</span><br><span class="line">			randomizedQuickSort(q+1,r);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	private static int randomizedPartition(int p,int r)</span><br><span class="line">	&#123;</span><br><span class="line">		int i&#x3D;random(p,r);</span><br><span class="line">		MyMath.swap(a, i, p);</span><br><span class="line">		return partition(p,r);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	private static int random(int i, int j)</span><br><span class="line">	&#123;</span><br><span class="line">		Random rand &#x3D; new Random();</span><br><span class="line">		return rand.nextInt(j-i+1)+i;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	private static int partition(int p,int r)</span><br><span class="line">	&#123;</span><br><span class="line">		Comparable x&#x3D;a[p];</span><br><span class="line">		int i&#x3D;p, j&#x3D;r+1;</span><br><span class="line">		while(true) &#123;</span><br><span class="line">			while(a[++i].compareTo(x)&lt;0&amp;&amp;i&lt;r);</span><br><span class="line">			while(a[--j].compareTo(x)&gt;0);</span><br><span class="line">			if(i&gt;&#x3D;j)</span><br><span class="line">				break;</span><br><span class="line">			MyMath.swap(a,i,j);</span><br><span class="line">		&#125;</span><br><span class="line">		a[p]&#x3D;a[j];</span><br><span class="line">		a[j]&#x3D;x;</span><br><span class="line">		return j;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		randomizedQuickSort(0,7);</span><br><span class="line">		for(int i&#x3D;0;i&lt;a.length;i++)</span><br><span class="line">			System.out.print(a[i]+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，使用全局变量的方法会有所不便，下面是正常的写法，需要注意的是只需要调用第一个数组即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public static void quickSort(int[] array) &#123;</span><br><span class="line">	quickSort(array, 0, array.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void quickSort(int[] array, int lower, int top) &#123;</span><br><span class="line">	if(lower &lt; top &amp;&amp; lower*top &gt;&#x3D; 0) &#123;</span><br><span class="line">		int partition &#x3D; Partition(array, lower, top);</span><br><span class="line">		quickSort(array, lower, partition - 1);</span><br><span class="line">		quickSort(array, partition - 1, top);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> public static int Partition(int[] array, int i, int j) &#123;</span><br><span class="line">	int temp;</span><br><span class="line">	while(i &lt; j) &#123;</span><br><span class="line">		while(i &lt; j &amp;&amp; array[i] &lt;&#x3D; array[j]) &#123;</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		if(i&lt;j) &#123;</span><br><span class="line">			temp &#x3D; array[i];</span><br><span class="line">			array[i] &#x3D; array[j];</span><br><span class="line">			array[j] &#x3D; temp;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		while(i &lt; j &amp;&amp; array[i] &gt;&#x3D; array[j]) &#123;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		if(i&lt;j) &#123;</span><br><span class="line">			temp &#x3D; array[i];</span><br><span class="line">			array[i] &#x3D; array[j];</span><br><span class="line">			array[j] &#x3D; temp;</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6，合并排序"><a href="#6，合并排序" class="headerlink" title="6，合并排序"></a>6，合并排序</h2><p>合并排序也是采用Comparable类型数组作为全局变量的方法来解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class Ex02_1 &#123;</span><br><span class="line">	static Comparable[] a&#x3D; &#123;23,5,9,16,30,25,17,18&#125;;</span><br><span class="line">	static Comparable b[]&#x3D; new Comparable[a.length];</span><br><span class="line">	public static void MergeSort(Comparable a[],int left,int right)</span><br><span class="line">	&#123;</span><br><span class="line">		if(left&lt;right) &#123;</span><br><span class="line">			int i&#x3D;(left+right)&#x2F;2;</span><br><span class="line">			MergeSort(a,left,i);</span><br><span class="line">			MergeSort(a,i+1,right);</span><br><span class="line">			Merge(a,b,left,i,right);</span><br><span class="line">			Copy(a,b,left,right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void Merge(Comparable [] c,Comparable d[],int l,int m,int r)</span><br><span class="line">	&#123;</span><br><span class="line">		int i&#x3D;l,j&#x3D;m+1,k&#x3D;l;</span><br><span class="line">		while((i&lt;&#x3D;m)&amp;&amp;(j&lt;&#x3D;r)) &#123;</span><br><span class="line">			if(c[i].compareTo(c[j])&lt;&#x3D;0)</span><br><span class="line">				d[k++]&#x3D;c[i++];</span><br><span class="line">			else</span><br><span class="line">				d[k++]&#x3D;c[j++];</span><br><span class="line">		&#125;</span><br><span class="line">		if(i&gt;m) &#123;</span><br><span class="line">			for(int q&#x3D;j;q&lt;&#x3D;r;q++)</span><br><span class="line">				d[k++]&#x3D;c[q];</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			for(int q&#x3D;i;q&lt;&#x3D;m;q++)</span><br><span class="line">				d[k++]&#x3D;c[q];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void Copy(Comparable [] c,Comparable d[],int l,int r) &#123;</span><br><span class="line">		for(int i&#x3D;l;i&lt;&#x3D;r;i++) &#123;</span><br><span class="line">			c[i]&#x3D;d[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		MergeSort(a,0,7);</span><br><span class="line">		for(int i&#x3D;0;i&lt;b.length;i++)</span><br><span class="line">			System.out.print(b[i]+&quot; &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>合并也是如此，给出常用方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] array) &#123;&#x2F;&#x2F;归并</span><br><span class="line">	int s&#x3D;1;</span><br><span class="line">	int n&#x3D;array.length;</span><br><span class="line">	int[] temp&#x3D;new int[n];</span><br><span class="line">	while(s&lt;n) &#123;</span><br><span class="line">		mergepass(array,temp,s,n);</span><br><span class="line">		s*&#x3D;2;</span><br><span class="line">		mergepass(temp,array,s,n);</span><br><span class="line">		s*&#x3D;2;</span><br><span class="line">	&#125;</span><br><span class="line">	mergepass(array,temp,s,n);</span><br><span class="line">	for(int i&#x3D;0;i&lt;n;i++) &#123;</span><br><span class="line">		array[i]&#x3D;temp[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void mergepass(int[] array,int[] order,int s,int n) &#123;</span><br><span class="line">	int p&#x3D;0;</span><br><span class="line">	while(p+2*s-1&lt;&#x3D;n-1) &#123;</span><br><span class="line">		merge(array,order,p,p+s-1,p+2*s-1);</span><br><span class="line">		p+&#x3D;2*s;</span><br><span class="line">	&#125;</span><br><span class="line">	if(p+s-1&lt;n-1) &#123;</span><br><span class="line">		merge(array,order,p,p+s-1,n-1);</span><br><span class="line">	&#125;</span><br><span class="line">	else &#123;</span><br><span class="line">		for(int i&#x3D;p;i&lt;&#x3D;n-1;i++) &#123;</span><br><span class="line">			order[i]&#x3D;array[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void merge(int[] array,int[] order,int h,int m,int t) &#123;</span><br><span class="line">	int i&#x3D;h,j&#x3D;m+1,k&#x3D;h;</span><br><span class="line">	while(i&lt;&#x3D;m&amp;&amp;j&lt;&#x3D;t) &#123;</span><br><span class="line">		if(array[i]&lt;&#x3D;array[j]) &#123;</span><br><span class="line">			order[k++]&#x3D;array[i++];</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			order[k++]&#x3D;array[j++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;&#x3D;m) &#123;</span><br><span class="line">		order[k++]&#x3D;array[i++];</span><br><span class="line">	&#125;</span><br><span class="line">	while(j&lt;&#x3D;t) &#123;</span><br><span class="line">		order[k++]&#x3D;array[j++];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="7，树形选择排序"><a href="#7，树形选择排序" class="headerlink" title="7，树形选择排序"></a>7，树形选择排序</h2><p>先是树的定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class TreeNode &#123;</span><br><span class="line">	public int data; &#x2F;&#x2F;结点的数据</span><br><span class="line">	public int index; &#x2F;&#x2F;结点的序号</span><br><span class="line">	public int active; &#x2F;&#x2F;参加选择标志，1表示参选，0表示不参选</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要注意的是要放在同一个包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">public static void tournamentSort(int[] array) &#123;&#x2F;&#x2F;胜者树</span><br><span class="line">	TreeNode[] tree;</span><br><span class="line">	int leafSize&#x3D;1;</span><br><span class="line">	while(leafSize&lt;array.length) &#123;</span><br><span class="line">		leafSize*&#x3D;2;</span><br><span class="line">	&#125;</span><br><span class="line">	int TreeSize&#x3D;2*leafSize-1;</span><br><span class="line">	int loadindex &#x3D;leafSize-1;</span><br><span class="line">	tree &#x3D;new TreeNode[TreeSize];</span><br><span class="line">	int j&#x3D;0;</span><br><span class="line">	for(int i&#x3D;loadindex;i&lt;TreeSize;i++) &#123;</span><br><span class="line">		tree[i]&#x3D;new TreeNode();</span><br><span class="line">		tree[i].index&#x3D;i;</span><br><span class="line">		if(j&lt;array.length) &#123;</span><br><span class="line">			tree[i].active&#x3D;1;</span><br><span class="line">			tree[i].data&#x3D;array[j++];</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			tree[i].active&#x3D;0;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	int i&#x3D;loadindex;</span><br><span class="line">	while(i&gt;0) &#123;</span><br><span class="line">		j&#x3D;i;</span><br><span class="line">		while(j&lt;2*i) &#123;</span><br><span class="line">			if(tree[j+1].active&#x3D;&#x3D;0 || (tree[j].data)&lt;&#x3D;tree[j+1].data) &#123;</span><br><span class="line">				tree[(j-1)&#x2F;2]&#x3D;tree[j];</span><br><span class="line">			&#125;</span><br><span class="line">			else &#123;</span><br><span class="line">				tree[(j-1)&#x2F;2]&#x3D;tree[j+1];</span><br><span class="line">			&#125;</span><br><span class="line">			j+&#x3D;2;</span><br><span class="line">		&#125;</span><br><span class="line">		i&#x3D;(i-1)&#x2F;2;</span><br><span class="line">	&#125;</span><br><span class="line">	for(i&#x3D;0;i&lt;array.length-1;i++) &#123;</span><br><span class="line">		array[i]&#x3D;tree[0].data;</span><br><span class="line">		tree[tree[0].index].active&#x3D;0;</span><br><span class="line">		updateTree(tree,tree[0].index);</span><br><span class="line">	&#125;</span><br><span class="line">	array[array.length-1]&#x3D;tree[0].data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void updateTree(TreeNode[] tree,int i) &#123;&#x2F;&#x2F;更新胜者树</span><br><span class="line">	int j;</span><br><span class="line">	if(i%2&#x3D;&#x3D;0) &#123;</span><br><span class="line">		tree[(i-1)&#x2F;2]&#x3D;tree[i-1];</span><br><span class="line">	&#125;</span><br><span class="line">	else &#123;</span><br><span class="line">		tree[(i-1)&#x2F;2]&#x3D;tree[i+1];</span><br><span class="line">	&#125;</span><br><span class="line">	i&#x3D;(i-1)&#x2F;2;</span><br><span class="line">	while(i&gt;0) &#123;</span><br><span class="line">		if(i%2&#x3D;&#x3D;0) &#123;</span><br><span class="line">			j&#x3D;i-1;</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			j&#x3D;i+1;</span><br><span class="line">		&#125;</span><br><span class="line">		if(tree[i].active&#x3D;&#x3D;0 || tree[j].active&#x3D;&#x3D;0) &#123;</span><br><span class="line">			if(tree[i].active&#x3D;&#x3D;1) &#123;</span><br><span class="line">				tree[(i-1)&#x2F;2]&#x3D;tree[i];</span><br><span class="line">			&#125;</span><br><span class="line">			else &#123;</span><br><span class="line">				tree[(i-1)&#x2F;2]&#x3D;tree[j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		else </span><br><span class="line">		if(tree[i].data&lt;&#x3D;tree[j].data) &#123;</span><br><span class="line">			tree[(i-1)&#x2F;2]&#x3D;tree[i];</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			tree[(i-1)&#x2F;2]&#x3D;tree[j];</span><br><span class="line">		&#125;</span><br><span class="line">		i&#x3D;(i-1)&#x2F;2;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -164,16 +181,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/11/sort1/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/10/11/sort1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/10/pytxt/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">白嫖付费文章|python实现字符替换</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -193,140 +269,14 @@
 
 
 
-
   
-    <article id="post-pytxt" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/10/pytxt/">白嫖付费文章|python实现字符替换</a>
-    </h1>
   
 
-        
-        <a href="/2020/10/10/pytxt/" class="archive-article-date">
-  	<time datetime="2020-10-10T12:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1、原理说明"><a href="#1、原理说明" class="headerlink" title="1、原理说明"></a>1、原理说明</h1><ul>
-<li>网页获取源代码，手动复制文章</li>
-<li>使用python把文章里的网页标签去除</li></ul>
-        
-          <a class="article-more-a" href="/2020/10/10/pytxt/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/10/pytxt/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-markdown语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/">markdown语法</a>
-    </h1>
   
 
-        
-        <a href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-10-10T07:56:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="写作介绍"><a href="#写作介绍" class="headerlink" title="写作介绍"></a>写作介绍</h1><h2 id="1，字体"><a href="#1，字体" class="headerlink" title="1，字体"></a>1，字体</h2><p><em>这是斜体</em> 或 <em>这也是斜体</em><br><strong>这是粗体</strong><br><strong><em>这是加粗体</em></strong><br><del>这是删除线</del></p>
-        
-          <a class="article-more-a" href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
+
   
 
 
@@ -349,8 +299,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
