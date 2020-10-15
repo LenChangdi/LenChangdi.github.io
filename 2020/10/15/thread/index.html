@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>小黑屋</title>
+  <title>多线程实现生产-消费模式|JAVA | 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分享一些有趣的技巧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小黑屋">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="KFC的生产与消费">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程实现生产-消费模式|JAVA">
+<meta property="og:url" content="http://example.com/2020/10/15/thread/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="分享一些有趣的技巧">
+<meta property="og:description" content="KFC的生产与消费">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-15T02:22:15.000Z">
+<meta property="article:modified_time" content="2020-10-15T02:24:40.733Z">
 <meta property="article:author" content="LenChangdi">
 <meta name="twitter:card" content="summary">
   
@@ -128,16 +130,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-thread" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-thread" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/thread/">多线程实现生产-消费模式|JAVA</a>
+    <h1 class="article-title" itemprop="name">
+      多线程实现生产-消费模式|JAVA
     </h1>
   
 
@@ -150,10 +150,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="KFC的生产与消费"><a href="#KFC的生产与消费" class="headerlink" title="KFC的生产与消费"></a>KFC的生产与消费</h1>
-        
-          <a class="article-more-a" href="/2020/10/15/thread/#more">more >></a>
-        
+        <h1 id="KFC的生产与消费"><a href="#KFC的生产与消费" class="headerlink" title="KFC的生产与消费"></a>KFC的生产与消费</h1><a id="more"></a>
+<h2 id="食物类"><a href="#食物类" class="headerlink" title="食物类"></a>食物类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package thread_KFC;</span><br><span class="line"></span><br><span class="line">public class food &#123;</span><br><span class="line">	String name&#x3D;&quot;&quot;;  </span><br><span class="line">    &#x2F;&#x2F;通过构造方法传入食物的名字  </span><br><span class="line">    public food(String name) &#123;  </span><br><span class="line">        this.name&#x3D;name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    &#x2F;&#x2F;get、set 方法  </span><br><span class="line">    public String getName() &#123;  </span><br><span class="line">        return name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    public void setName(String name) &#123;  </span><br><span class="line">        this.name &#x3D; name;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="消费者类"><a href="#消费者类" class="headerlink" title="消费者类"></a>消费者类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package thread_KFC;</span><br><span class="line"></span><br><span class="line">public class Customers extends Thread&#123;  </span><br><span class="line">    KFC kfc;  </span><br><span class="line">    &#x2F;&#x2F;KFC要传入，保证每一个服务员和用户在同一个KFC对象内  </span><br><span class="line">    public Customers(KFC kfc) &#123;  </span><br><span class="line">        this.kfc&#x3D;kfc;  </span><br><span class="line">    &#125;  </span><br><span class="line">    @Override  </span><br><span class="line">    public void run() &#123;  </span><br><span class="line">        int size&#x3D;(int)(Math.random()*5)+1;&#x2F;&#x2F;每次要消费的食物的数量  </span><br><span class="line">        while (true) &#123;  </span><br><span class="line">            kfc.consu(size);&#x2F;&#x2F;在消费的方法里面传入参数  </span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package thread_KFC;</span><br><span class="line"></span><br><span class="line">public class Waiter extends Thread&#123;  </span><br><span class="line">    KFC kfc;  </span><br><span class="line">    &#x2F;&#x2F;KFC要传入，保证每一个服务员和用户在同一个KFC对象内  </span><br><span class="line">    public Waiter(KFC kfc) &#123;  </span><br><span class="line">        this.kfc&#x3D;kfc;  </span><br><span class="line">    &#125;  </span><br><span class="line">    @Override  </span><br><span class="line">    public void run() &#123;  </span><br><span class="line">        int size&#x3D;(int)(Math.random()*5)+5;&#x2F;&#x2F;每次生产的数量  </span><br><span class="line">        while (true) &#123;  </span><br><span class="line">            kfc.prod(size);&#x2F;&#x2F;传入每次生产的数量  </span><br><span class="line">        &#125;      </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<h2 id="KFC类"><a href="#KFC类" class="headerlink" title="KFC类"></a>KFC类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">package thread_KFC;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class KFC &#123;</span><br><span class="line">	&#x2F;&#x2F;食物的种类  </span><br><span class="line">    String[] names &#x3D; &#123; &quot;薯条&quot;, &quot;烧板&quot;, &quot;鸡翅&quot;, &quot;可乐&quot; &#125;;  </span><br><span class="line">      </span><br><span class="line">    &#x2F;&#x2F;生产的最大值，到达后可以休息  </span><br><span class="line">    static final int Max &#x3D; 20;  </span><br><span class="line">      </span><br><span class="line">    &#x2F;&#x2F;存放食物的集合  </span><br><span class="line">    List&lt;food&gt; foods &#x3D; new ArrayList&lt;food&gt;();  </span><br><span class="line">       </span><br><span class="line">    &#x2F;&#x2F; 生产食物的方法  </span><br><span class="line">    public void prod(int index) &#123;  </span><br><span class="line">        synchronized (this) &#123;  </span><br><span class="line">            &#x2F;&#x2F; 如果食物数量大于20  </span><br><span class="line">            while (foods.size() &#x3D;&#x3D; Max) &#123;  </span><br><span class="line">                System.out.println(&quot;食材够了&quot;);  </span><br><span class="line">                this.notifyAll();&#x2F;&#x2F;这个唤醒是针对生产者和消费者，有all  </span><br><span class="line">                try &#123;  </span><br><span class="line">                    String name&#x3D;Thread.currentThread().getName();  </span><br><span class="line">                    this.wait();&#x2F;&#x2F;这个唤醒是针对生产者，没有all  </span><br><span class="line">                    System.out.println(&quot;生产者：&quot;+name);  </span><br><span class="line">                &#125; catch (InterruptedException e) &#123;  </span><br><span class="line">                    e.printStackTrace();  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">               </span><br><span class="line">            &#x2F;&#x2F; 开始生产食物食物&#x2F;&#x2F;有一点要注意的  </span><br><span class="line">            System.out.println(&quot;开始生产食物&quot;);  </span><br><span class="line">            for (int i &#x3D; 0; i &lt; index; i++) &#123;  </span><br><span class="line">            	if(foods.size()&#x3D;&#x3D;Max)</span><br><span class="line">            		break;</span><br><span class="line">                food food &#x3D; new food(names[(int) (Math.random() * 4)]);  </span><br><span class="line">                foods.add(food);  </span><br><span class="line">                System.out.println(&quot;生产了&quot; + food.getName() + foods.size());  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">       </span><br><span class="line">    &#x2F;&#x2F; 消费食物的方法  </span><br><span class="line">    public void consu(int index) &#123;   </span><br><span class="line">        synchronized (this) &#123;  </span><br><span class="line">            while (foods.size() &lt; index) &#123;  </span><br><span class="line">                System.out.println(&quot;食材不够了&quot;);  </span><br><span class="line">                this.notifyAll();&#x2F;&#x2F;这个唤醒是针对生产者和消费者，有all  </span><br><span class="line">                try &#123;  </span><br><span class="line">                    String name&#x3D;Thread.currentThread().getName();  </span><br><span class="line">                    this.wait();&#x2F;&#x2F;这个唤醒是针对消费者，没有all  </span><br><span class="line">                    System.out.println(&quot;消费者：&quot;+name);  </span><br><span class="line">                &#125; catch (InterruptedException e) &#123;  </span><br><span class="line">                    e.printStackTrace();  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">            &#x2F;&#x2F; 足够消费  </span><br><span class="line">            System.out.println(&quot;开始消费&quot;);  </span><br><span class="line">            for (int i &#x3D; 0; i &lt; index; i++) &#123;  </span><br><span class="line">                food food &#x3D; foods.remove(foods.size() - 1);  </span><br><span class="line">                System.out.println(&quot;消费了一个&quot; + food.getName() + foods.size());  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="主类"><a href="#主类" class="headerlink" title="主类"></a>主类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package thread_KFC;</span><br><span class="line"></span><br><span class="line">public class MainClass &#123;  </span><br><span class="line">    &#x2F;**  </span><br><span class="line">     * 生产者消费者模式  </span><br><span class="line">     *  </span><br><span class="line">     * *&#x2F;  </span><br><span class="line">    public static void main(String[] args) &#123;  </span><br><span class="line">      </span><br><span class="line">        &#x2F;&#x2F; 只实例化一个KFC对象，保证每一个服务员和用户在同一个KFC对象内  </span><br><span class="line">        KFC kfc &#x3D; new KFC();  </span><br><span class="line">          </span><br><span class="line">        &#x2F;&#x2F;实例化4个客户对象  </span><br><span class="line">        Customers c1 &#x3D; new Customers(kfc);  </span><br><span class="line">        Customers c2 &#x3D; new Customers(kfc);  </span><br><span class="line">        Customers c3 &#x3D; new Customers(kfc);  </span><br><span class="line">        Customers c4 &#x3D; new Customers(kfc);  </span><br><span class="line">          </span><br><span class="line">        &#x2F;&#x2F;实例化3个服务员对象  </span><br><span class="line">        Waiter waiter1 &#x3D; new Waiter(kfc);  </span><br><span class="line">        Waiter waiter2 &#x3D; new Waiter(kfc);  </span><br><span class="line">        Waiter waiter3 &#x3D; new Waiter(kfc);  </span><br><span class="line">          </span><br><span class="line">        &#x2F;&#x2F;让所有的对象的线程都开始工作  </span><br><span class="line">        waiter1.start();  </span><br><span class="line">        waiter2.start();  </span><br><span class="line">        waiter3.start();  </span><br><span class="line">        c1.start();  </span><br><span class="line">        c2.start();  </span><br><span class="line">        c3.start();  </span><br><span class="line">        c4.start();  </span><br><span class="line">    &#125;      </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
       
 
       
@@ -166,10 +168,73 @@
       
 
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/10/15/thread/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/13/lambda/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Lambda表达式的实现|JAVA</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -189,254 +254,14 @@
 
 
 
-
   
-    <article id="post-lambda" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/13/lambda/">Lambda表达式的实现|JAVA</a>
-    </h1>
   
 
-        
-        <a href="/2020/10/13/lambda/" class="archive-article-date">
-  	<time datetime="2020-10-13T07:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="lambda简化过程"><a href="#lambda简化过程" class="headerlink" title="lambda简化过程"></a>lambda简化过程</h1><p>1.外部类<br>2.静态内部类<br>3.局部内部类<br>4.匿名内部类<br>5.Lambda表达式</p>
-        
-          <a class="article-more-a" href="/2020/10/13/lambda/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sort1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/11/sort1/">排序代码|java</a>
-    </h1>
   
 
-        
-        <a href="/2020/10/11/sort1/" class="archive-article-date">
-  	<time datetime="2020-10-11T02:20:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）"><a href="#各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）" class="headerlink" title="各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）"></a>各排序代码（冒泡，插入，选择，堆，快速，合并，树形选择）</h1><h2 id="1，冒泡排序"><a href="#1，冒泡排序" class="headerlink" title="1，冒泡排序"></a>1，冒泡排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void Bubble(int[] array) &#123;</span><br><span class="line">	int temp;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; array.length - 1; i++) &#123;</span><br><span class="line">		for (int j &#x3D; i; j &lt; array.length; j++) &#123;</span><br><span class="line">			if(array[i] &gt; array[j]) &#123;</span><br><span class="line">				temp &#x3D; array[i];</span><br><span class="line">				array[i] &#x3D; array[j];</span><br><span class="line">				array[j] &#x3D; temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2020/10/11/sort1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-pytxt" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/10/pytxt/">白嫖付费文章|python实现字符替换</a>
-    </h1>
   
 
-        
-        <a href="/2020/10/10/pytxt/" class="archive-article-date">
-  	<time datetime="2020-10-10T12:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1、原理说明"><a href="#1、原理说明" class="headerlink" title="1、原理说明"></a>1、原理说明</h1><ul>
-<li>网页获取源代码，手动复制文章</li>
-<li>使用python把文章里的网页标签去除</li></ul>
-        
-          <a class="article-more-a" href="/2020/10/10/pytxt/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-markdown语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/">markdown语法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-10-10T07:56:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="写作介绍"><a href="#写作介绍" class="headerlink" title="写作介绍"></a>写作介绍</h1><h2 id="1，字体"><a href="#1，字体" class="headerlink" title="1，字体"></a>1，字体</h2><p><em>这是斜体</em> 或 <em>这也是斜体</em><br><strong>这是粗体</strong><br><strong><em>这是加粗体</em></strong><br><del>这是删除线</del></p>
-        
-          <a class="article-more-a" href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -459,8 +284,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
