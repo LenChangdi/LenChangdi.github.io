@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | 小黑屋</title>
+  <title>IO的常用方法|JAVA | 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分享一些有趣的技巧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小黑屋">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="IO流的种类有输出流、输入流、字节流、字符流、过滤流、缓冲流。这里的方法比较能用得上的有文件的读写、复制、删除。其中用不同的方法可以实现按编码读写，按行读写等功能。还有文件夹的递归遍历和删除。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO的常用方法|JAVA">
+<meta property="og:url" content="http://example.com/2020/10/18/io/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="分享一些有趣的技巧">
+<meta property="og:description" content="IO流的种类有输出流、输入流、字节流、字符流、过滤流、缓冲流。这里的方法比较能用得上的有文件的读写、复制、删除。其中用不同的方法可以实现按编码读写，按行读写等功能。还有文件夹的递归遍历和删除。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-18T08:26:31.000Z">
+<meta property="article:modified_time" content="2020-10-18T08:27:41.082Z">
 <meta property="article:author" content="LenChangdi">
 <meta name="twitter:card" content="summary">
   
@@ -128,184 +130,161 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-io" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      IO的常用方法|JAVA
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/18/io/" class="archive-article-date">
+
+        
+        <a href="/2020/10/18/io/" class="archive-article-date">
   	<time datetime="2020-10-18T08:26:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-18</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/18/io/">IO的常用方法|JAVA</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><p>流的种类有输出流、输入流、字节流、字符流、过滤流、缓冲流。这里的方法比较能用得上的有文件的读写、复制、删除。其中用不同的方法可以实现按编码读写，按行读写等功能。还有文件夹的递归遍历和删除。</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
-          
+<h2 id="1字节流复制文件"><a href="#1字节流复制文件" class="headerlink" title="1字节流复制文件"></a>1字节流复制文件</h2><ul>
+<li>字节缓冲区写法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">&#x2F;*</span><br><span class="line"> * 字节流复制文件</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Copy &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception&#123;</span><br><span class="line">		&#x2F;&#x2F;1创建流</span><br><span class="line">		FileInputStream fis &#x3D; new FileInputStream(&quot;e:\\ps\\小黑屋.png&quot;);</span><br><span class="line">		FileOutputStream fos &#x3D; new FileOutputStream(&quot;d:\\002.jpg&quot;);</span><br><span class="line">		&#x2F;&#x2F;2一边读，一边写</span><br><span class="line">		byte[] buf &#x3D; new byte[1024];&#x2F;&#x2F;字节缓冲区</span><br><span class="line">		int count &#x3D; 0;</span><br><span class="line">		while((count &#x3D; fis.read(buf)) !&#x3D; -1) &#123;</span><br><span class="line">			fos.write(buf, 0, count);</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;关闭流</span><br><span class="line">		fis.close();</span><br><span class="line">		fos.close();</span><br><span class="line">		System.out.println(&quot;复制完毕&quot;);		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>字节缓冲流写法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import java.io.BufferedInputStream;</span><br><span class="line">import java.io.BufferedOutputStream;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">&#x2F;*</span><br><span class="line"> * 复制文件，字节缓冲流写法</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Copy2 &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception&#123;</span><br><span class="line">		&#x2F;&#x2F;1创建流</span><br><span class="line">		FileInputStream fis &#x3D; new FileInputStream(&quot;e:\\ps\\小黑屋.png&quot;);</span><br><span class="line">		BufferedInputStream bis &#x3D; new BufferedInputStream(fis);</span><br><span class="line">		FileOutputStream fos &#x3D; new FileOutputStream(&quot;d:\\002.jpg&quot;);</span><br><span class="line">		BufferedOutputStream bos &#x3D; new BufferedOutputStream(fos);</span><br><span class="line">		&#x2F;&#x2F;2一边读，一边写</span><br><span class="line">		int data;</span><br><span class="line">		while((data &#x3D; bis.read()) !&#x3D; -1) &#123;</span><br><span class="line">			bos.write(data);</span><br><span class="line">			bos.flush();&#x2F;&#x2F;立即刷新，防止断电数据丢失</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;关闭流</span><br><span class="line">		bis.close();</span><br><span class="line">		bos.close();&#x2F;&#x2F;调用flush方法</span><br><span class="line">		System.out.println(&quot;复制完毕&quot;);	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2序列化"><a href="#2序列化" class="headerlink" title="2序列化"></a>2序列化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;1创建对象流</span><br><span class="line">FileOutputStream fos &#x3D; new FileOutputStream(&quot;d:\\sut.bin&quot;);</span><br><span class="line">ObjectOutputStream oos &#x3D; new ObjectOutputStream(fos);</span><br><span class="line">&#x2F;&#x2F;2序列化</span><br><span class="line">Student zhangsan &#x3D; new Student(&quot;张三&quot;, 20);</span><br><span class="line">Student lisi &#x3D; new Student(&quot;李四&quot;, 20);</span><br><span class="line">ArrayList&lt;Student&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">list.add(zhangsan);</span><br><span class="line">list.add(lisi);</span><br><span class="line">oos.writeObject(list);</span><br><span class="line">&#x2F;&#x2F;3关闭</span><br><span class="line">oos.close();</span><br></pre></td></tr></table></figure>
+序列化要求如下：</li>
+</ul>
+<p>1.序列化类必须要实现Serializable接口<br>2.序列化类中对象属性要求实现Serializable接口<br>3.序列化版本号ID，保证序列化的类和反序列化的类是同一个类<br>4.使用transient（瞬间）修饰属性，这个属性不会被序列化<br>5.静态属性不能序列化<br>6.序列化多个对象，可以借助集合实现</p>
+<ul>
+<li>反序列化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;1创建对象流</span><br><span class="line">FileInputStream fis &#x3D; new FileInputStream(&quot;d:\\sut.bin&quot;);</span><br><span class="line">ObjectInputStream ois &#x3D; new ObjectInputStream(fis);</span><br><span class="line">&#x2F;&#x2F;2读取文件（反序列化）</span><br><span class="line">ArrayList&lt;Student&gt; list &#x3D; (ArrayList&lt;Student&gt;)ois.readObject();</span><br><span class="line">&#x2F;&#x2F;3关闭</span><br><span class="line">ois.close();</span><br></pre></td></tr></table></figure>
+<h2 id="3字符流"><a href="#3字符流" class="headerlink" title="3字符流"></a>3字符流</h2></li>
+<li>reader<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.FileReader;</span><br><span class="line"></span><br><span class="line">public class bfreader &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception&#123;</span><br><span class="line">		&#x2F;&#x2F;1创建FileReader 文件字符输入流</span><br><span class="line">		FileReader fr &#x3D; new FileReader(&quot;d:\\write.txt&quot;);</span><br><span class="line">		BufferedReader br &#x3D; new BufferedReader(fr);</span><br><span class="line">		&#x2F;&#x2F;2获取</span><br><span class="line">		&#x2F;&#x2F;2.1单个字符获取</span><br><span class="line">&#x2F;&#x2F;		char[] buf &#x3D; new char[1024];</span><br><span class="line">&#x2F;&#x2F;		int count &#x3D; 0;</span><br><span class="line">&#x2F;&#x2F;		while((count&#x3D;br.read(buf))!&#x3D;-1) &#123;</span><br><span class="line">&#x2F;&#x2F;			System.out.println(new String (buf,0,count));</span><br><span class="line">&#x2F;&#x2F;		&#125;</span><br><span class="line">				</span><br><span class="line">		&#x2F;&#x2F;2.2第二种方式，按行读取</span><br><span class="line">		String line &#x3D; null;</span><br><span class="line">		while((line&#x3D;br.readLine())!&#x3D;null) &#123;</span><br><span class="line">			System.out.println(line);</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;3关闭</span><br><span class="line">		fr.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+reader多了个按行读取的功能</li>
+<li>InputStreamReader<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;1创建InputStreaReader对象</span><br><span class="line">FileInputStream fis &#x3D; new FileInputStream(&quot;d:\\write.txt&quot;);</span><br><span class="line">InputStreamReader isr &#x3D; new InputStreamReader(fis,&quot;utf-8&quot;);&#x2F;&#x2F;改为GBK</span><br><span class="line">&#x2F;&#x2F;2读取文件</span><br><span class="line">int data&#x3D;0;</span><br><span class="line">while((data&#x3D;isr.read())!&#x3D;-1) &#123;</span><br><span class="line">	System.out.print((char)data);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;3关闭</span><br><span class="line">isr.close();</span><br></pre></td></tr></table></figure>
+多了个指定使用编码打开文件的功能，如果与文件本来的编码不一样，会乱码<br>有reader当然有writer啦</li>
+<li>writer<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import java.io.BufferedWriter;</span><br><span class="line">import java.io.FileWriter;</span><br><span class="line"></span><br><span class="line">public class bfwriter &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception&#123;</span><br><span class="line">		&#x2F;&#x2F;1创建BufferedWriter对象</span><br><span class="line">		FileWriter fw &#x3D; new FileWriter(&quot;d:\\buffer.txt&quot;);</span><br><span class="line">		BufferedWriter bw &#x3D; new BufferedWriter(fw);</span><br><span class="line">		&#x2F;&#x2F;2写入</span><br><span class="line">		for(int i&#x3D;0;i&lt;10;i++) &#123;</span><br><span class="line">			bw.write(&quot;属于我们的时代开始了！&quot;);</span><br><span class="line">			bw.newLine();</span><br><span class="line">			bw.flush();</span><br><span class="line">		&#125;</span><br><span class="line">		bw.close();</span><br><span class="line">		System.out.println(&quot;执行完毕&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>OutputWriter<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;1创建OutputStreamWriter</span><br><span class="line">FileOutputStream fos &#x3D; new FileOutputStream(&quot;d:\\info.txt&quot;);</span><br><span class="line">OutputStreamWriter osw &#x3D; new OutputStreamWriter(fos,&quot;gbk&quot;);</span><br><span class="line">&#x2F;&#x2F;2写入</span><br><span class="line">for(int i&#x3D;0;i&lt;10;i++) &#123;</span><br><span class="line">	osw.write(&quot;属于我们的时代开始了！\r\n&quot;);</span><br><span class="line">	osw.flush();</span><br><span class="line">&#125;&#x2F;&#x2F;3关闭</span><br><span class="line">osw.close();</span><br><span class="line">System.out.println(&quot;执行成功&quot;);</span><br></pre></td></tr></table></figure>
+多了个按编码写文件的功能</li>
+</ul>
+<h2 id="4文件操作"><a href="#4文件操作" class="headerlink" title="4文件操作"></a>4文件操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import java.io.File;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">public class file1_1 &#123;</span><br><span class="line">	public static void main(String[] args)throws Exception&#123;</span><br><span class="line">		fileOpe();</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;(1)分隔符</span><br><span class="line">	public static void separator() &#123;</span><br><span class="line">		System.out.println(&quot;路径分隔符&quot;+File.pathSeparator);</span><br><span class="line">		System.out.println(&quot;名称分隔符&quot;+File.separator);</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;(2)文件操作</span><br><span class="line">	public static void fileOpe() throws Exception &#123;</span><br><span class="line">		&#x2F;&#x2F;1创建文件</span><br><span class="line">		File file &#x3D; new File(&quot;d:\\file.txt&quot;);</span><br><span class="line">		&#x2F;&#x2F;System.out.println(file.toString());</span><br><span class="line">		if(!file.exists()) &#123;</span><br><span class="line">			boolean b &#x3D; file.createNewFile();</span><br><span class="line">			System.out.println(&quot;创建结果：&quot;+b);</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;2删除文件</span><br><span class="line">		&#x2F;&#x2F;2.1直接删除</span><br><span class="line">		&#x2F;&#x2F;System.out.println(&quot;删除结果：&quot;+file.delete());</span><br><span class="line">		&#x2F;&#x2F;2.2使用jvm退出时删除</span><br><span class="line">&#x2F;&#x2F;		file.deleteOnExit();</span><br><span class="line">&#x2F;&#x2F;		Thread.sleep(5000);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;3获取文件信息</span><br><span class="line">		System.out.println(&quot;获取文件的绝对路径：&quot;+file.getAbsolutePath());</span><br><span class="line">		System.out.println(&quot;获取路径：&quot;+file.getPath());</span><br><span class="line">		System.out.println(&quot;获取文件名称：&quot;+file.getName());</span><br><span class="line">		System.out.println(&quot;获取文件长度：&quot;+file.length());</span><br><span class="line">		System.out.println(&quot;文件创建时间：&quot;+new Date(file.lastModified()).toLocaleString());</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;4判断</span><br><span class="line">		System.out.println(&quot;是否可写：&quot;+file.canWrite());</span><br><span class="line">		System.out.println(&quot;是否时文件：&quot;+file.isFile());</span><br><span class="line">		System.out.println(&quot;是否隐藏：&quot;+file.isHidden());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>把文件改成文件夹，方法都是一样的，除了创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File dir &#x3D; new File(&quot;d:\\aaa\\bbb\\ccc&quot;);</span><br><span class="line">dir.mkdir();&#x2F;&#x2F;只能创建单级目录</span><br><span class="line">dir.mkdirs();&#x2F;&#x2F;创建多级目录</span><br></pre></td></tr></table></figure>
+<h2 id="5打印流"><a href="#5打印流" class="headerlink" title="5打印流"></a>5打印流</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.io.PrintWriter;</span><br><span class="line"></span><br><span class="line">public class pwwriter &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception&#123;</span><br><span class="line">		&#x2F;&#x2F;1创建打印流</span><br><span class="line">		PrintWriter pw &#x3D; new PrintWriter(&quot;d:\\print.txt&quot;);</span><br><span class="line">		&#x2F;&#x2F;2打印</span><br><span class="line">		pw.println(97);</span><br><span class="line">		pw.println(true);</span><br><span class="line">		pw.println(3.14);</span><br><span class="line">		pw.println(&#39;a&#39;);</span><br><span class="line">		&#x2F;&#x2F;3关闭</span><br><span class="line">		pw.close();</span><br><span class="line">		System.out.println(&quot;执行完毕&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6递归遍历和删除文件夹"><a href="#6递归遍历和删除文件夹" class="headerlink" title="6递归遍历和删除文件夹"></a>6递归遍历和删除文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import java.io.File;</span><br><span class="line"></span><br><span class="line">public class DiGui &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		listDir(new File(&quot;d:\\studa&quot;));</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;递归遍历</span><br><span class="line">	public static void listDir(File dir) &#123;</span><br><span class="line">		File[] files&#x3D; dir.listFiles();</span><br><span class="line">		if(files!&#x3D;null &amp;&amp; files.length&gt;0) &#123;</span><br><span class="line">			for (File file : files) &#123;</span><br><span class="line">				if(file.isDirectory()) &#123;</span><br><span class="line">					listDir(file);&#x2F;&#x2F;递归</span><br><span class="line">				&#125;else &#123;</span><br><span class="line">					System.out.println(file.getAbsolutePath());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;递归删除</span><br><span class="line">	public static void deleteDir(File dir) &#123;</span><br><span class="line">		File[] files &#x3D; dir.listFiles();</span><br><span class="line">		if(files!&#x3D;null&amp;&amp;files.length&gt;0) &#123;</span><br><span class="line">			for(File file : files) &#123;</span><br><span class="line">				if(file.isDirectory()) &#123;&#x2F;&#x2F;递归</span><br><span class="line">					deleteDir(file);</span><br><span class="line">				&#125;else &#123;</span><br><span class="line">					&#x2F;&#x2F;删除文件</span><br><span class="line">					System.out.println(file.getAbsolutePath()+&quot;删除&quot;+file.delete());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>个人感觉是最有用的一个方法了</p>
 
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/10/18/io/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/15/thread/" class="archive-article-date">
-  	<time datetime="2020-10-15T02:22:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/15/thread/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">多线程实现生产-消费模式|JAVA</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/15/thread/">多线程实现生产-消费模式|JAVA</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/13/lambda/" class="archive-article-date">
-  	<time datetime="2020-10-13T07:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/13/lambda/">Lambda表达式的实现|JAVA</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/11/sort1/" class="archive-article-date">
-  	<time datetime="2020-10-11T02:20:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/11/sort1/">排序代码|java</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/10/pytxt/" class="archive-article-date">
-  	<time datetime="2020-10-10T12:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/10/pytxt/">白嫖付费文章|python实现字符替换</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-10-10T07:56:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/">markdown语法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -328,8 +307,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
