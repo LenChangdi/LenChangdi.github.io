@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2020/10 | 小黑屋</title>
+  <title>注解与反射|JAVA | 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分享一些有趣的技巧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小黑屋">
-<meta property="og:url" content="http://example.com/archives/2020/10/index.html">
+  <meta name="description" content="注解与反射1内部注解内部注解@Override 重写的注解@Deprecated 不推荐程序员使用，但是可以使用，或者存在更好的方式@SuppressWarnings(“all”) 警告镇压">
+<meta property="og:type" content="article">
+<meta property="og:title" content="注解与反射|JAVA">
+<meta property="og:url" content="http://example.com/2020/10/19/reflect/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="分享一些有趣的技巧">
+<meta property="og:description" content="注解与反射1内部注解内部注解@Override 重写的注解@Deprecated 不推荐程序员使用，但是可以使用，或者存在更好的方式@SuppressWarnings(“all”) 警告镇压">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-19T11:19:29.000Z">
+<meta property="article:modified_time" content="2020-10-19T11:22:53.230Z">
 <meta property="article:author" content="LenChangdi">
 <meta name="twitter:card" content="summary">
   
@@ -128,211 +130,147 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-reflect" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      注解与反射|JAVA
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/19/reflect/" class="archive-article-date">
+
+        
+        <a href="/2020/10/19/reflect/" class="archive-article-date">
   	<time datetime="2020-10-19T11:19:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/19/reflect/">注解与反射|JAVA</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="注解与反射"><a href="#注解与反射" class="headerlink" title="注解与反射"></a>注解与反射</h1><h2 id="1内部注解"><a href="#1内部注解" class="headerlink" title="1内部注解"></a>1内部注解</h2><p>内部注解<br>@Override 重写的注解<br>@Deprecated 不推荐程序员使用，但是可以使用，或者存在更好的方式<br>@SuppressWarnings(“all”) 警告镇压</p>
+<a id="more"></a>
+<h2 id="2元注解"><a href="#2元注解" class="headerlink" title="2元注解"></a>2元注解</h2><p>用于定义注解<br>@Target 表示注解可以用在什么地方<br>@Retention  表示注解再什么地方还有效<br>Runtime&gt;class&gt;sources<br>@Documented  表示是否将注解生成在JAVAdoc中<br>@Inherited  子类可以继承父类的注解</p>
+<h2 id="3自定义注解"><a href="#3自定义注解" class="headerlink" title="3自定义注解"></a>3自定义注解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Test01 &#123;</span><br><span class="line">	@MyAnnotation(name &#x3D; &quot;dghkd&quot;,age&#x3D;18,id&#x3D;1)</span><br><span class="line">	public void test() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Target(&#123;ElementType.TYPE,ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@interface MyAnnotation&#123;</span><br><span class="line">	String name() default &quot;&quot;;</span><br><span class="line">	int age() default 0;</span><br><span class="line">	int id() default -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<h2 id="4类的获得"><a href="#4类的获得" class="headerlink" title="4类的获得"></a>4类的获得</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public class Test01 &#123;</span><br><span class="line">	public static void main(String[] args) throws ClassNotFoundException&#123;</span><br><span class="line">		Person person &#x3D; new Student();</span><br><span class="line">		System.out.println(person.name);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;方式一：通过对象获得</span><br><span class="line">		Class c1 &#x3D; person.getClass();</span><br><span class="line">		System.out.println(c1.hashCode());</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;方式二：forname获得</span><br><span class="line">		Class c2 &#x3D; Class.forName(&quot;p2.Student&quot;);</span><br><span class="line">		System.out.println(c2.hashCode());</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;方式三：通过类名.class获得</span><br><span class="line">		Class c3 &#x3D; Student.class;</span><br><span class="line">		System.out.println(c3.hashCode());</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;方式四：基本内置类型的包装类都有一个Type属性</span><br><span class="line">		Class c4 &#x3D; Integer.TYPE;</span><br><span class="line">		System.out.println(c4);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;获得父类类型</span><br><span class="line">		Class c5 &#x3D; c1.getSuperclass();</span><br><span class="line">		System.out.println(c5);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Person&#123;</span><br><span class="line">	public String name;</span><br><span class="line">	</span><br><span class="line">	public Person() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Person(String name) &#123;</span><br><span class="line">		this.name &#x3D; name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Person [name&#x3D;&quot; + name + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Student extends Person&#123;</span><br><span class="line">	public Student() &#123;</span><br><span class="line">		this.name&#x3D;&quot;学生&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="5所有类型的类"><a href="#5所有类型的类" class="headerlink" title="5所有类型的类"></a>5所有类型的类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Test02 &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Class c1 &#x3D; Object.class; &#x2F;&#x2F;类</span><br><span class="line">		Class c2 &#x3D; Comparable.class;  &#x2F;&#x2F;接口</span><br><span class="line">		Class c3 &#x3D; String[].class; &#x2F;&#x2F;一维数组</span><br><span class="line">		Class c4 &#x3D; int[][].class; &#x2F;&#x2F;二维数组</span><br><span class="line">		Class c5 &#x3D; Override.class; &#x2F;&#x2F;注解</span><br><span class="line">		Class c6 &#x3D; ElementType.class; &#x2F;&#x2F;枚举</span><br><span class="line">		Class c7 &#x3D; Integer.class; &#x2F;&#x2F;基本数据类型</span><br><span class="line">		Class c8 &#x3D; void.class;&#x2F;&#x2F;void</span><br><span class="line">		Class c9 &#x3D; Class.class; &#x2F;&#x2F;Class</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6反射"><a href="#6反射" class="headerlink" title="6反射"></a>6反射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Test03 &#123;</span><br><span class="line">	public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException&#123;</span><br><span class="line">		&#x2F;&#x2F;获得class对象</span><br><span class="line">		Class c1 &#x3D; Class.forName(&quot;p2.User&quot;);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;构造一个对象</span><br><span class="line">&#x2F;&#x2F;		User user &#x3D; (User)c1.newInstance();&#x2F;&#x2F;本质是调用了类的无参构造器</span><br><span class="line">&#x2F;&#x2F;		System.out.println(user);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;通过构造器创建对象</span><br><span class="line">&#x2F;&#x2F;		Constructor constructor &#x3D; c1.getDeclaredConstructor(String.class,int.class,int.class);</span><br><span class="line">&#x2F;&#x2F;		User user2 &#x3D; (User)constructor.newInstance(&quot;小明&quot;,001,18);</span><br><span class="line">&#x2F;&#x2F;		System.out.println(user2);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;通过反射调用普通方法</span><br><span class="line">		User user3 &#x3D; (User)c1.newInstance();</span><br><span class="line">		&#x2F;&#x2F;通过反射获取一个方法</span><br><span class="line">		Method setName &#x3D; c1.getDeclaredMethod(&quot;setName&quot;, String.class);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;invoke  激活</span><br><span class="line">		&#x2F;&#x2F;（对象，&quot;方法的值&quot;）</span><br><span class="line">		setName.invoke(user3, &quot;明明&quot;);</span><br><span class="line">		System.out.println(user3.getName());</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;通过反射操作属性</span><br><span class="line">		User user4 &#x3D; (User)c1.newInstance();</span><br><span class="line">		Field name &#x3D; c1.getDeclaredField(&quot;name&quot;);</span><br><span class="line">		</span><br><span class="line">		name.setAccessible(true);</span><br><span class="line">		name.set(user4, &quot;大明&quot;);</span><br><span class="line">		System.out.println(user4.getName());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>User类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">	 private String name;</span><br><span class="line">	 private int id;</span><br><span class="line">	 private int age;</span><br><span class="line">&#x2F;&#x2F;省略了构造方法，get和set，toString</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7注解与反射"><a href="#7注解与反射" class="headerlink" title="7注解与反射"></a>7注解与反射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line">	public static void main(String[] args) throws ClassNotFoundException, SecurityException, NoSuchFieldException &#123;</span><br><span class="line">		Class c1 &#x3D; Class.forName(&quot;p3.Student&quot;);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;通过反射获得注解</span><br><span class="line">		Annotation[] annotations &#x3D; c1.getAnnotations();</span><br><span class="line">		for (Annotation annotation : annotations) &#123;</span><br><span class="line">			System.out.println(annotation);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;获得注解的value的值</span><br><span class="line">		Tabletest tabletest &#x3D;(Tabletest)c1.getAnnotation(Tabletest.class);</span><br><span class="line">		String value &#x3D; tabletest.value();</span><br><span class="line">		System.out.println(value);</span><br><span class="line">		</span><br><span class="line">		&#x2F;&#x2F;获得类指定的注解</span><br><span class="line">		Field f &#x3D; c1.getDeclaredField(&quot;name&quot;);</span><br><span class="line">		Fieldtest annotation &#x3D;f.getAnnotation(Fieldtest.class);</span><br><span class="line">		System.out.println(annotation.columnName());</span><br><span class="line">		System.out.println(annotation.type());</span><br><span class="line">		System.out.println(annotation.length());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Tabletest(&quot;db_student&quot;)</span><br><span class="line">class Student&#123;</span><br><span class="line">	@Fieldtest(columnName &#x3D; &quot;db_id&quot;,type &#x3D; &quot;int&quot;,length &#x3D; 10)</span><br><span class="line">	private int id;</span><br><span class="line">	@Fieldtest(columnName &#x3D; &quot;db_age&quot;,type &#x3D; &quot;int&quot;,length &#x3D; 10)</span><br><span class="line">	private int age;</span><br><span class="line">	@Fieldtest(columnName &#x3D; &quot;db_name&quot;,type &#x3D; &quot;varchar&quot;,length &#x3D; 3)</span><br><span class="line">	private String name;</span><br><span class="line">	</span><br><span class="line">	public Student() &#123;&#125;</span><br><span class="line"></span><br><span class="line">	public Student(int id, int age, String name) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.id &#x3D; id;</span><br><span class="line">		this.age &#x3D; age;</span><br><span class="line">		this.name &#x3D; name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setId(int id) &#123;</span><br><span class="line">		this.id &#x3D; id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age &#x3D; age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name &#x3D; name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Student [id&#x3D;&quot; + id + &quot;, age&#x3D;&quot; + age + &quot;, name&#x3D;&quot; + name + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;类名的注解</span><br><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@interface Tabletest&#123;</span><br><span class="line">	String value();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;属性的注解</span><br><span class="line">@Target(ElementType.FIELD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@interface Fieldtest&#123;</span><br><span class="line">	String columnName();</span><br><span class="line">	String type();</span><br><span class="line">	int length();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/10/19/reflect/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/18/io/" class="archive-article-date">
-  	<time datetime="2020-10-18T08:26:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/18/io/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IO的常用方法|JAVA</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/18/io/">IO的常用方法|JAVA</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/15/thread/" class="archive-article-date">
-  	<time datetime="2020-10-15T02:22:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/15/thread/">多线程实现生产-消费模式|JAVA</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/13/lambda/" class="archive-article-date">
-  	<time datetime="2020-10-13T07:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/13/lambda/">Lambda表达式的实现|JAVA</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/11/sort1/" class="archive-article-date">
-  	<time datetime="2020-10-11T02:20:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/11/sort1/">排序代码|java</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/10/pytxt/" class="archive-article-date">
-  	<time datetime="2020-10-10T12:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/10/pytxt/">白嫖付费文章|python实现字符替换</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-10-10T07:56:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/10/markdown%E8%AF%AD%E6%B3%95/">markdown语法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -355,8 +293,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
